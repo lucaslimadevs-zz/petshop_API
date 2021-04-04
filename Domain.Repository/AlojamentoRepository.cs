@@ -20,13 +20,13 @@ namespace Domain.Repository
 
         //public object filter(AlojamentoFilter filter)
         //{
-        //    var SQL = new StringBuilder(" SELECT * FROM esttbalmoxarifado ");
+        //    var SQL = new StringBuilder(" SELECT * FROM alojamento ");
         //    var parametros = new Dictionary<string, object>();
 
         //    if (filter != null)
         //    {
         //        SQL.Append(WhereFilter(filter));
-        //        SQL.Append($" ORDER BY esttbalmoxarifado_descricao, esttbalmoxarifado_pkseq");
+        //        SQL.Append($" ORDER BY alojamento_descricao");
         //    }
 
         //    return new
@@ -39,7 +39,7 @@ namespace Domain.Repository
         public override IEnumerable<Alojamento> GetAll()
         {
             var SQL = @"SELECT * FROM alojamento
-                        ORDER BY id_alojamento";
+                        ORDER BY alojamento_descricao";
 
             var qry = _connection.Query<Alojamento>(SQL);
 
@@ -50,7 +50,7 @@ namespace Domain.Repository
         {
             var SQL = @"SELECT * FROM alojamento                        
                         WHERE id_alojamento = @sequencia
-                        ORDER BY id_alojamento";
+                        ORDER BY alojamento_descricao";
 
             var qry = _connection.Query<Alojamento>
               (
@@ -84,9 +84,7 @@ namespace Domain.Repository
             {
                 if (TestarAlojamento(alojamento, "U"))
                 {
-                    var alojamentoAnterior = Get(alojamento.id_alojamento);
                     alojamento = base.Update(alojamento);
-
                 }
                 return alojamento;
             }
@@ -110,13 +108,29 @@ namespace Domain.Repository
         }
 
 
-        private bool TestarAlojamento(Alojamento alojamento, string operacao)
+        private bool TestarAlojamento(Alojamento alojamento, string operation)
         {
             try
             {
-
-                if (operacao.Equals("I"))
+                if ((alojamento.alojamento_status < 0) || (alojamento.alojamento_status > 2))
                 {
+                    NotificationAdd("Status do alojamento deve ser (0 = ocupado, 1 = livre, 2 = esperando o dono)");
+                }
+
+                if (alojamento.alojamento_descricao.Trim().Equals(""))
+                {
+                    NotificationAdd("Descrição é obrigatória");
+                }
+
+                if (operation.Equals("I")) // insert
+                {
+
+
+                }
+
+                if (operation.Equals("U")) // Update
+                {
+
 
                 }
 

@@ -19,7 +19,7 @@ namespace petshop_API.Controllers
         }
 
         [HttpGet]        
-        public ActionResult<IEnumerable<Alojamento>> GetAll([FromQuery] Alojamento alojamento)
+        public ActionResult<IEnumerable<Alojamento>> GetAll()
         {
             return Ok(_repository.GetAll());
         }
@@ -34,7 +34,7 @@ namespace petshop_API.Controllers
         }
 
         [HttpPost]        
-        public ActionResult<Alojamento> Insert(Alojamento alojamento)
+        public ActionResult<Alojamento> Insert([FromBody] Alojamento alojamento)
         {
             if (ModelState.IsValid)
             {
@@ -46,7 +46,7 @@ namespace petshop_API.Controllers
         }
 
         [HttpPut]
-        public ActionResult<Alojamento> Update(Alojamento alojamento)
+        public ActionResult<Alojamento> Update([FromBody] Alojamento alojamento)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace petshop_API.Controllers
         }
 
         [HttpDelete]
-        public ActionResult<Alojamento> Delete(Alojamento alojamento)
+        public ActionResult<Alojamento> Delete([FromBody] Alojamento alojamento)
         {
             if (ModelState.IsValid)
             {

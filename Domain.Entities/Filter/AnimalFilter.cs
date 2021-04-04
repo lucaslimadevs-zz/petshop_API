@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Domain.Entities.Filter
 {
-    public class AlojamentoFilter
+    public class AnimalFilter
     {
-        public string alojamento_descricao { get; set; }
+        public string animal_nome { get; set; }
     }
 }

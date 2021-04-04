@@ -7,9 +7,11 @@ namespace Domain.Entities
     public class Alojamento
     {
         [Dapper.Contrib.Extensions.Key]        
-        public int id_alojamento { get; set; }       
+        public int id_alojamento { get; set; }
         [Required(ErrorMessage = "descrição é obrigatória")]
-        public string descricao { get; set; }
+        public string alojamento_descricao { get; set; }
+        [Required(ErrorMessage = "status é obrigatório")]
+        public int alojamento_status { get; set; }
 
     }
 }

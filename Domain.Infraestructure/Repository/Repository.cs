@@ -5,6 +5,7 @@ using System.Data;
 using MySql.Data.MySqlClient;
 using System;
 using Microsoft.Extensions.Configuration;
+using Dapper;
 
 namespace Domain.Infraestructure.Repository
 {
@@ -92,6 +93,11 @@ namespace Domain.Infraestructure.Repository
         protected List<string> ListAll()
         {
             return this._notification.ListAll();
+        }
+
+        public virtual IEnumerable<T> ReadTable(string SQL, Dictionary<string, object> parameters)
+        {
+            return _connection.Query<T>(SQL, param: parameters);
         }
 
 
