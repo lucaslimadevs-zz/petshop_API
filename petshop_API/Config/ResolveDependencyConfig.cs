@@ -16,7 +16,8 @@ namespace petshop_API.Config
             services.AddScoped<AlojamentoRepository>();
             services.AddScoped<ClienteRepository>();
             services.AddScoped<AnimalRepository>();
-        }                                          
+            services.AddScoped<ProntuarioRepository>();
+        }
     }                                              
 }                                                  
                                                    

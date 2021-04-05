@@ -20,7 +20,8 @@ namespace Domain.Repository
 
         public object Filter(AnimalFilter filter)
         {
-            var SQL = new StringBuilder(" SELECT * FROM animal ");
+            var SQL = new StringBuilder(@" SELECT * FROM animal 
+                                           LEFT OUTER JOIN cliente ON id_cliente = animal_fkcliente ");
             var parameters = new Dictionary<string, object>();
 
             if (filter != null)
@@ -31,7 +32,12 @@ namespace Domain.Repository
 
             return new
             {
-                conteudo = ReadTable(SQL.ToString(), parameters),
+                conteudo = _connection.Query<Animal, Cliente, Animal>(
+                    SQL.ToString(),
+                    (animal, cliente) => { animal.fkcliente = cliente; return animal; },
+                    splitOn: "id_cliente"
+                )
+                
             };
         }
 
@@ -130,9 +136,9 @@ namespace Domain.Repository
                 else
                 {
                     SQL = @" SELECT * FROM cliente WHERE id_cliente = @id";
-                    var ciente = _connection.Query<Animal>(SQL, new { id = animal.animal_fkcliente}).FirstOrDefault();
+                    var cliente = _connection.Query<Animal>(SQL, new { id = animal.animal_fkcliente}).FirstOrDefault();
 
-                    if (ciente == null)
+                    if (cliente == null)
                         NotificationAdd("Cliente não cadastrado.");
                 }
 
