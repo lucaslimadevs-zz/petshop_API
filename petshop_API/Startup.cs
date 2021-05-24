@@ -22,6 +22,8 @@ namespace petshop_API
         {
             ResolveDependencyConfig.ResolveDependency(services);
             services.AddControllers();
+            services.ResolveDependency();
+            services.ResolveSwagger();
 
             services.Configure<ApiBehaviorOptions>(
                 options =>
@@ -48,9 +50,18 @@ namespace petshop_API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseRouting();
-
             app.UseAuthorization();
+
+            app.UseRouting();
+            app.UseSwagger(s =>
+            {
+                s.SerializeAsV2 = true;
+            });
+
+            app.UseSwaggerUI(s =>
+            {
+                s.SwaggerEndpoint("/swagger/v1/swagger.json", "Pet Shop API");
+            });
 
             app.UseEndpoints(endpoints =>
             {

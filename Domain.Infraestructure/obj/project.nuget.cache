@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9L/SYBfK/84aeaDYi4H2uHdhqnY7iUfeH8is0q4h3Xqh065/adxMHeD22Qb8c2vaNA1hTTyORQEgRE5Ptq6KBQ==",
+  "dgSpecHash": "hCsj0viWKZa22mk1QLn1fqFLDZsXnhyrC5d1Eh67UlOexTdyrj5HwjCjRsCrn587zXl4KP8bIhUzI4y1jwuTlw==",
   "success": true,
   "projectFilePath": "C:\\Git_lucaslimadevs\\petshop_API\\Domain.Infraestructure\\Domain.Infraestructure.csproj",
   "expectedPackageFiles": [
